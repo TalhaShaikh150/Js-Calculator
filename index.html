@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glassmorphism Calculator</title>
+    <style>
+        /* Root Variables for Theming */
+        :root {
+            --bg-gradient-start: #1e1e2e;
+            --bg-gradient-end: #3a3a5a;
+            --glass-bg: rgba(255, 255, 255, 0.15);
+            --glass-border: rgba(255, 255, 255, 0.25);
+            --btn-bg: rgba(255, 255, 255, 0.2);
+            --btn-hover: rgba(255, 255, 255, 0.35);
+            --operator-bg: rgba(255, 255, 255, 0.3);
+            --equal-bg: #ff5722;
+            --equal-hover: #e64a19;
+            --text-color: white;
+            --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            --inner-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+        }
+
+        .calculator {
+            background: var(--glass-bg);
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: var(--box-shadow);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            width: 350px;
+            text-align: center;
+            border: 1px solid var(--glass-border);
+        }
+
+        .display {
+            width: 100%;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            margin-bottom: 20px;
+            text-align: right;
+            padding: 20px;
+            font-size: 28px;
+            color: var(--text-color);
+            border: none;
+            outline: none;
+            box-shadow: var(--inner-shadow);
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        button {
+            width: 100%;
+            height: 65px;
+            font-size: 22px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            border-radius: 12px;
+            transition: 0.3s;
+            color: var(--text-color);
+            box-shadow: var(--box-shadow);
+        }
+
+        button.operator {
+            background: var(--operator-bg);
+        }
+
+        button.number {
+            background: var(--btn-bg);
+        }
+
+        button.equal {
+                height: 215%;
+            background: var(--equal-bg);
+        }
+
+        button:hover {
+            background: var(--btn-hover);
+            transform: translateY(-2px);
+        }
+
+        button.equal:hover {
+            background: var(--equal-hover);
+        }
+
+        button:active {
+            transform: scale(0.95);
+            box-shadow: var(--inner-shadow);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" class="display" id="display" disabled>
+        <div class="buttons">
+            <button class="operator" onclick="Clear()">C</button>
+            <button class="operator" onclick="addToDisplay('/')">/</button>
+            <button class="operator" onclick="addToDisplay('*')">*</button>
+            <button class="operator" onclick="Delete()">←</button>
+
+            <button class="number" onclick="addToDisplay('7')">7</button>
+            <button class="number" onclick="addToDisplay('8')">8</button>
+            <button class="number" onclick="addToDisplay('9')">9</button>
+            <button class="operator" onclick="addToDisplay('-')">-</button>
+
+            <button class="number"onclick="addToDisplay('4')">4</button>
+            <button class="number"onclick="addToDisplay('5')">5</button>
+            <button class="number"onclick="addToDisplay('6')">6</button>
+            <button class="operator" onclick="addToDisplay('+')">+</button>
+
+            <button class="number" onclick="addToDisplay('1')">1</button>
+            <button class="number" onclick="addToDisplay('2')">2</button>
+            <button class="number" onclick="addToDisplay('3')">3</button>
+            <button class="equal" onclick="Calculate()"style="grid-row:;">=</button>
+
+            <button class="number" onclick="addToDisplay('0')"style="grid-column: span 1;">0</button>
+            <button class="number" onclick="addToDisplay('00')"style="grid-column: span 1;">00</button>
+            <button class="number" onclick="addToDisplay('.')">.</button>
+        </div>
+    </div>
+
+    <script>
+        const inputDisplay = document.getElementById('display')
+
+        function addToDisplay(input){
+            inputDisplay.value += input
+        }
+
+        function Clear(){
+            inputDisplay.value = ""
+        }
+        function Delete(){
+            inputDisplay.value = inputDisplay.value.slice(0,-1)
+        }
+        function Calculate(){
+            inputDisplay.value = eval(inputDisplay.value)
+            
+        }
+    </script>
+</body>
+</html>
